@@ -35,6 +35,7 @@ const getLogos = async (req, res, next) => {
 
 const handleForm = async (req, res, next) => {
   const formData = req.body;
+  console.log(formData);
   try {
     if (!validator.isEmail(formData.email))
       throw new Error('Check your Email Format.');
@@ -49,9 +50,33 @@ const handleForm = async (req, res, next) => {
       recipientName: formData.recipientName,
       recipientMobile: formData.recipientMobile,
       recipientEmail: formData.recipientEmail,
+      category: formData.category,
     });
-    console.log(newForm.data);
     res.status(200).json(generateResponse(true, 'Form SUbmitted', newForm));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getForms = async (req, res, next) => {
+  try {
+    const forms = await formModel.findAll();
+    res.status(200).json(generateResponse(true, 'got the forms', forms));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const removeAllForms = async (req, res, next) => {
+  try {
+    const removed = await formModel.destroy({
+      where: {},
+    });
+    res
+      .status(200)
+      .json(
+        generateResponse(true, 'deltion of all records successful', removed),
+      );
   } catch (error) {
     next(error);
   }
@@ -60,4 +85,6 @@ const handleForm = async (req, res, next) => {
 module.exports = {
   getLogos,
   handleForm,
+  getForms,
+  removeAllForms,
 };
