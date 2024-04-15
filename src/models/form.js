@@ -1,5 +1,6 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 const { sequelize } = require('../utils/db');
+const { validate } = require('validator');
 
 const formModel = sequelize.define(
   'form',
@@ -13,10 +14,20 @@ const formModel = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Name is required',
+        },
+      },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isEmail: {
+          msg: 'Invalid email address',
+        },
+      },
     },
     mobilenumber: {
       type: DataTypes.STRING,

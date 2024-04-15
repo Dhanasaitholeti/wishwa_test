@@ -9,43 +9,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        primaryKey: true,
-        defaultValue: UUIDV4,
-      },
       name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      mobile_number: {
+        type: Sequelize.STRING,
+      },
+      occation_date: {
+        type: Sequelize.DATE,
       },
       email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      mobilenumber: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      occasiondate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      donatingForFamilyFriends: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
-      recipientName: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      recipientMobile: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      recipientEmail: {
-        type: DataTypes.STRING,
-        allowNull: true,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
