@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs/promises');
-// import validator from 'validator';
 const validator = require('validator');
+const { v4: uuidv4 } = require('uuid');
 
 const formModel = require('../models/form');
 const { generateResponse } = require('../utils/generateResponse');
@@ -16,10 +16,11 @@ const getLogos = async (req, res, next) => {
 
     const logoData = await Promise.all(
       svgFiles.map(async (file) => {
+        const id = uuidv4(); // Generate a unique ID for each logo
         const title = path.parse(file).name;
         const filePath = path.join(logosDirectory, file);
         const data = await fs.readFile(filePath, 'utf8');
-        return { title, data };
+        return { id, title, data };
       }),
     );
     res
@@ -34,7 +35,6 @@ const getLogos = async (req, res, next) => {
 
 const handleForm = async (req, res, next) => {
   const formData = req.body;
-  console.log(formData);
   try {
     if (!validator.isEmail(formData.email))
       throw new Error('Check your Email Format.');
