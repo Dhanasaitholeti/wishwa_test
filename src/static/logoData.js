@@ -1,5 +1,6 @@
-const fs = require('fs/promises'); // Import fs promises module for async file operations
+const fs = require('fs/promises');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid'); // Import uuid library for generating unique IDs
 
 async function readLogosDirectory() {
   const logosDirectory = path.resolve('./src/static/logo');
@@ -7,14 +8,11 @@ async function readLogosDirectory() {
     // Read the contents of the logos directory
     const files = await fs.readdir(logosDirectory);
 
-    // Create an array to store logoData
     const logoData = files.map((file) => {
-      // Extract the filename without extension
+      const id = uuidv4();
       const title = file.replace('.svg', '');
-      // Construct the full path to the SVG file
       const logoPath = `${logosDirectory}${file}`;
-      // Return an object with title and logo properties
-      return { title, logo: logoPath };
+      return { id, title, logo: logoPath };
     });
 
     return logoData; // Return the logoData array
