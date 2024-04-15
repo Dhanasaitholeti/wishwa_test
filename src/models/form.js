@@ -28,7 +28,7 @@ const formModel = sequelize.define(
     },
   },
   {
-    tableName: 'forms',
+    tableName: 'form',
   },
 );
 

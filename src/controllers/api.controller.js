@@ -32,12 +32,15 @@ const getLogos = async (req, res, next) => {
 
 const handleForm = async (req, res, next) => {
   const formData = req.body;
+  console.log(req.body);
   try {
+    const formsData = await formModel.findAll();
+    console.log(formsData);
     const newForm = await formModel.create({
-      name: formData.name,
-      mobilenumber: formData.mobileNumber,
+      name: 'Dhanasai',
+      mobilenumber: 'adkjfbsd',
       occasiondate: new Date(),
-      email: formData.email,
+      email: 'fjbdfjknjk',
     });
     console.log(newForm.data);
     res.status(200).json(generateResponse(true, 'Form SUbmitted', newForm));
