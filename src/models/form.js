@@ -26,6 +26,22 @@ const formModel = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    donatingForFamilyFriends: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    recipientName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    recipientMobile: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    recipientEmail: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: 'form',
